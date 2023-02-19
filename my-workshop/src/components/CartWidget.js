@@ -5,15 +5,15 @@ import { Icon } from "@iconify/react";
 function CartWidget() {
   return (
     <Cart>
-      <div class="icon-section">
-        <div class="cart-wrapper">
-          <div class="cart">
-            <Icon icon="ion:cart" color="white" />
+      <div className="icon-section">
+        <div className="cart-wrapper">
+          <div className="cart">
+          <Icon icon="material-symbols:shopping-cart-rounded" color="white" />
           </div>
-          <div class="cart-badge">
+          <div className="cart-badge">
             <span id="cart-count">3</span>
           </div>
-          <div class="box" id="box">
+          <div className="box" id="box">
             <Icon icon="ph:cube-thin" color="white" />
           </div>
         </div>
@@ -27,22 +27,12 @@ export default CartWidget;
 const Cart = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-  :root {
-    --font: "Poppins", sans-serif;
-    --bg-color: #e8e8e8;
-    --card-color: #f5f5f5;
-    --primary-color: #6085f7;
-    --primary-contrast: #ffffff;
-    --warning-color: #f86666;
-    --warning-contrast: #ffffff;
-  }
-
   .card-wrapper {
     width: 380px;
-    padding: 30px;
+    padding: 50px;
     border: 10px;
     border-radius: 20px;
-    background: var(--card-color);
+    background: #f5f5f5;
     box-shadow: 0 0 20px 1px rgba(5, 5, 5, 0.1);
   }
 
@@ -51,6 +41,7 @@ const Cart = styled.div`
     align-items: center;
     justify-content: center;
     padding: 40px 0;
+    color: #e8e8e8;
     .cart-wrapper {
       position: relative;
       width: 50px;
@@ -61,7 +52,7 @@ const Cart = styled.div`
         left: 0;
         width: 100%;
         height: 100%;
-        Icon {
+        svg {
           width: 100%;
           height: 100%;
         }
@@ -70,16 +61,16 @@ const Cart = styled.div`
         position: absolute;
         top: -10px;
         right: -15px;
-        width: 28px;
-        height: 28px;
-        padding: 5px;
+        width: 10px;
+        height: 10px;
+        padding: 10px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--primary-color);
-        color: var(--primary-contrast);
-        font-family: var(--font);
+        background: #6085f7;
+        color: #ffffff;
+        font-family: "Poppins", sans-serif;
       }
       .box {
         position: absolute;
@@ -89,7 +80,7 @@ const Cart = styled.div`
         opacity: 0;
         width: 20px;
         height: 20px;
-        Icon {
+        svg {
           width: 100%;
           height: 100%;
         }

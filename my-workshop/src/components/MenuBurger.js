@@ -4,9 +4,7 @@ import styled from "styled-components";
 function MenuBurger(props) {
   return (
     <Menu>
-      <div 
-        onClick={props.handleClick} 
-        className={`icon nav-icon-6 ${props.clicked ? 'open' : ''}`}>
+      <div onClick={props.handleClick} className={`icon nav-icon-6 ${props.clicked ? 'open' : ''}`}>
           <span></span>
           <span></span>
           <span></span>
@@ -18,6 +16,10 @@ function MenuBurger(props) {
 export default MenuBurger;
 
 const Menu = styled.div`
+
+  display: flex;
+  justify-content: end;
+
   .nav-icon-6 {
     width: 35px;
     height: 30px;

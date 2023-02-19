@@ -1,41 +1,54 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import styled from "styled-components";
 import CartWidget from "./CartWidget";
 import MenuBurger from "./MenuBurger";
+import { getCategories } from "../services/getCategories";
+import { Link } from "react-router-dom";
+import logo from '../assets/HASBULLA.png'
 
-function Navbar() {
+const Navbar = () => {
   const [clicked, setClicked] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const handleClick = () => {
     //Invierte el boolean
     setClicked(!clicked);
   };
 
+  useEffect(() => {
+    getCategories()
+    .then((datos) => {
+      setCategories(datos);
+    }).catch((err) => {
+      alert(err.message)
+    });
+  
+  }, [])
+  
+
   return (
     <>
       <NavContainer>
-        <h2>
-          <span>Opa Opa</span>
-        </h2>
-        <div className={`links ${clicked ? "active" : ""}`}>
-          <a onClick={handleClick} href="/">
-            Inicio
-          </a>
-          <a onClick={handleClick} href="/">
-            Tienda
-          </a>
-          <a onClick={handleClick} href="/">
-            Sobre nosotros
-          </a>
-          <a onClick={handleClick} href="/">
-            Contacto
-          </a>
+        <div className="logo">
+          <figure>
+            <img src={logo} alt="logo"></img>
+          </figure>
         </div>
-        <CartWidget/>
+        <div className={`links ${clicked ? "active" : ""}`}>
+          {
+            categories.map((c,i) => {
+              return <Link key={i} onClick={handleClick} to={`category/${c}`}>{c}</Link>
+            })
+          }
+        </div>
+        <div className="cart-container">
+          <CartWidget/>
+        </div>
         <div className="burguer">
           <MenuBurger clicked={clicked} handleClick={handleClick} />
+          <BgDiv className={`initial ${clicked ? "active" : ""}`}></BgDiv>
         </div>
-        <BgDiv className={`initial ${clicked ? "active" : ""}`}></BgDiv>
+        
       </NavContainer>
     </>
   );
@@ -44,24 +57,34 @@ function Navbar() {
 export default Navbar;
 
 const NavContainer = styled.nav`
-  h2 {
-    color: white;
-    span {
-      font-weight: 600;
-      font-weight: bold;
-    }
-  }
   padding: 0.4rem;
-  background-color: #333;
+  background-color: black;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+
+  .logo{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    figure{
+      margin: 0;
+    }
+    img{
+      width: 5rem;
+    }
+  }
+  .cart-container{
+    flex: 1;
+  }
   a {
     color: white;
     text-decoration: none;
+    text-transform: capitalize;
     margin-right: 1rem;
   }
   .links {
+    flex: 3;
     position: absolute;
     top: -700px;
     left: -2000px;
@@ -86,7 +109,7 @@ const NavContainer = styled.nav`
       display: block;
     }
   }
-  .links.active {
+  .links .active {
     width: 100%;
     display: block;
     position: absolute;
@@ -103,6 +126,7 @@ const NavContainer = styled.nav`
     }
   }
   .burguer {
+    flex: 1;
     @media (min-width: 768px) {
       display: none;
     }
@@ -110,20 +134,21 @@ const NavContainer = styled.nav`
 `;
 
 const BgDiv = styled.div`
-  background-color: #222;
-  position: absolute;
-  top: -2000px;
-  left: -2000px;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  transition: all 0.6s ease;
-
-  &.active {
-    border-radius: 0 0 80% 0;
-    top: 0;
-    left: 0;
+  @media (max-width: 768px){
+    background-color: #222;
+    position: absolute;
+    top: -2000px;
+    left: -2000px;
     width: 100%;
     height: 100%;
+    z-index: -1;
+    transition: all 0.6s ease;
+    &.active {
+      border-radius: 0 0 80% 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 `;
