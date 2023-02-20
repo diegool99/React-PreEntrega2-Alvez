@@ -39,7 +39,7 @@ const ItemProduct = styled.div`
 
 .item img {
 	width: 100%;
-	height: 15rem;
+	height: 30rem;
 
     @media (max-width: 768px) {
 	    height: 10rem;

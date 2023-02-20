@@ -1,10 +1,10 @@
-import React, { useState , useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CartWidget from "./CartWidget";
 import MenuBurger from "./MenuBurger";
 import { getCategories } from "../services/getCategories";
 import { Link } from "react-router-dom";
-import logo from '../assets/HASBULLA.png'
+import logo from '../assets/HASBULLA.png';
 
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
@@ -15,17 +15,8 @@ const Navbar = () => {
     setClicked(!clicked);
   };
 
-  useEffect(() => {
-    getCategories()
-    .then((datos) => {
-      setCategories(datos);
-    }).catch((err) => {
-      alert(err.message)
-    });
+  getCategories().then((datos) => { setCategories(datos) }).catch((err) => { alert(err.message) });
   
-  }, [])
-  
-
   return (
     <>
       <NavContainer>
